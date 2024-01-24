@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+
 import "./style.css";
-import './App.css'; 
 
 function App() {
   // React States
@@ -80,16 +79,7 @@ function App() {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isSubmitted ? (
-          <div>User is successfully logged in</div>
-        ) : (
-          <div>
-            {renderForm}
-            <div className="register-link">
-              Not registered yet? <Link to="/register">Register here</Link>
-            </div>
-          </div>
-        )}
+        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
       </div>
     </div>
   );
