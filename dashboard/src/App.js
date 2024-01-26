@@ -1,21 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./style.css";
 import "./styles.css";
-import Register from "./Register";
 import Login from "./Login";
+import Register from "./Register";
 
 const App = () => {
   return (
     <Router>
-      <div>
-        <nav>
-          <Link to="/">Login</Link>
-        </nav>
-
-        <Route path="/" exact component={Login} />
-      </div>
-    </Router>
+      <Routes>
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+      </Routes>
+    </Router>  
   );
 };
 

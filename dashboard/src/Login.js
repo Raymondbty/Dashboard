@@ -87,7 +87,7 @@ export default function Login() {
         )}
         {!valid && (
           <button className="form-field" type="submit">
-            Register
+            Login
           </button>
         )}
       </form>
