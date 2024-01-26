@@ -1,9 +1,7 @@
-app.js :
-
-import "./styles.css";
 import React, { useState } from "react";
+import "./styles.css";
 
-export default function App() {
+export default function Login() {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -11,7 +9,6 @@ export default function App() {
   });
 
   const handleInputChange = (event) => {
-    /* event.persist(); NO LONGER USED IN v.17*/
     event.preventDefault();
 
     const { name, value } = event.target;
@@ -46,7 +43,7 @@ export default function App() {
         )}
         {!valid && (
           <input
-            class="form-field"
+            className="form-field"
             type="text"
             placeholder="First Name"
             name="firstName"
@@ -61,7 +58,7 @@ export default function App() {
 
         {!valid && (
           <input
-            class="form-field"
+            className="form-field"
             type="text"
             placeholder="Last Name"
             name="lastName"
@@ -76,7 +73,7 @@ export default function App() {
 
         {!valid && (
           <input
-            class="form-field"
+            className="form-field"
             type="email"
             placeholder="Email"
             name="email"
@@ -89,7 +86,7 @@ export default function App() {
           <span id="email-error">Please enter an email address</span>
         )}
         {!valid && (
-          <button class="form-field" type="submit">
+          <button className="form-field" type="submit">
             Register
           </button>
         )}
@@ -97,87 +94,3 @@ export default function App() {
     </div>
   );
 }
-
-
-index.js :
-
-import { StrictMode } from "react";
-import ReactDOM from "react-dom";
-
-import App from "./App";
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
-);
-
-style.css:
-
-body {
-    background: #76b852;
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .form-container {
-    width: 360px;
-    background-color: white;
-    margin: auto;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    padding: 10px;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 10px;
-  }
-  
-  .success-message {
-    font-family: "Roboto", sans-serif;
-    background-color: #3f89f8;
-    padding: 15px;
-    color: white;
-    text-align: center;
-  }
-  
-  .form-field {
-    margin: 10px 0 10px 0;
-    padding: 15px;
-    font-size: 16px;
-    border: 0;
-    font-family: "Roboto", sans-serif;
-  }
-  
-  span {
-    font-family: "Roboto", sans-serif;
-    font-size: 14px;
-    color: red;
-    margin-bottom: 15px;
-  }
-  
-  input {
-    background: #f2f2f2;
-  }
-  
-  .error {
-    border-style: solid;
-    border: 2px solid #ffa4a4;
-  }
-  
-  button {
-    background: #4caf50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    cursor: default;
-  }
-  
