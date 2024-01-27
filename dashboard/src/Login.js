@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 export default function Login() {
@@ -45,7 +46,7 @@ export default function Login() {
           <input
             className="form-field"
             type="text"
-            placeholder="First Name"
+            placeholder="Firt Name"
             name="firstName"
             value={values.firstName}
             onChange={handleInputChange}
@@ -89,6 +90,12 @@ export default function Login() {
           <button className="form-field" type="submit">
             Login
           </button>
+        )}
+
+        {!valid && (
+          <Link to="/register" className="form-field" style={{ marginLeft: '100px' }}>
+            Go to Register
+          </Link>
         )}
       </form>
     </div>

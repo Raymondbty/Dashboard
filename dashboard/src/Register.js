@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const Register = () => {
@@ -137,6 +138,12 @@ const Register = () => {
           <button className="form-field" type="submit">
             Register
           </button>
+        )}
+
+        {!valid && (
+          <Link to="/" className="form-field" style={{ marginLeft: '100px' }}>
+            Go to Login
+          </Link>
         )}
       </form>
     </div>

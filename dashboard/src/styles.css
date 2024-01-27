@@ -1,5 +1,5 @@
 body {
-    background: #76b852;
+    background: url('animated_space.gif') center/cover fixed no-repeat;
     display: flex;
     min-height: 100vh;
     justify-content: center;
