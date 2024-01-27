@@ -33,15 +33,18 @@ export default function Login() {
   return (
     <div className="form-container">
       <form className="register-form" onSubmit={handleSubmit}>
-        {submitted && valid && (
-          <div className="success-message">
-            <h3>
-              {" "}
-              Welcome {values.firstName} {values.lastName}{" "}
-            </h3>
-            <div> Your registration was successful! </div>
-          </div>
-        )}
+      {submitted && valid && (
+      <div className="success-message">
+        <h3>
+          {" "}
+          Welcome {values.firstName} {values.lastName}{" "}
+        </h3>
+        <div> Your registration was successful! </div>
+        <Link to="/dashboard" className="form-field">
+          Go to Dashboard
+        </Link>
+      </div>
+    )}
         {!valid && (
           <input
             className="form-field"

@@ -4,15 +4,17 @@ import "./style.css";
 import "./styles.css";
 import Login from "./Login";
 import Register from "./Register";
+import Dashboard from "./Dashboard";  // Importez la nouvelle page Dashboard
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-    </Router>  
+    </Router>
   );
 };
 
