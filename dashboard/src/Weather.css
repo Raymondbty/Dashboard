@@ -1,0 +1,9 @@
+.weather-service-container {
+    text-align: center;
+  }
+  
+  .weather-service-container img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 10px;
+  }
