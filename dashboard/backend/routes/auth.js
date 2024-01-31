@@ -3,14 +3,15 @@ const bcrypt = require('bcrypt');
 const pool = require('../db');
 const cors = require('cors');
 
-const router = express()
+const app = express();
+app.use(express.json());
+app.use(cors());
 
+const PORT = 3001;
 
-router.use(express.json)
-
-router.use(cors());
+app.use(cors());
 // Route
-router.post('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
 
   try {
@@ -37,7 +38,7 @@ router.post('/register', async (req, res) => {
 });
 
 // Route login
-router.post('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -64,8 +65,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.listen(3001, () => {
+app.listen(3001, () => {
   console.log(`Server is running on http://localhost:3001`);
 });
 
-module.exports = router;
+module.exports = app;
