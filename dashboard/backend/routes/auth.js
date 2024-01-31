@@ -1,9 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const pool = require('../db');
+const cors = require('cors');
 
-const router = express.Router();
+const router = express()
 
+
+router.use(express.json)
+
+router.use(cors());
 // Route
 router.post('/register', async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
@@ -57,6 +62,10 @@ router.post('/login', async (req, res) => {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
+});
+
+router.listen(3001, () => {
+  console.log(`Server is running on http://localhost:3001`);
 });
 
 module.exports = router;

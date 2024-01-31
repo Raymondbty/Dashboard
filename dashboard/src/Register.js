@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 
 const Register = () => {
+  const navigate = useNavigate()
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -24,22 +25,29 @@ const Register = () => {
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      values.firstName &&
-      values.lastName &&
-      values.email &&
-      values.password &&
-      values.confirmPassword &&
-      values.password === values.confirmPassword
-    ) {
-      setValid(true);
-    }
-    setSubmitted(true);
-  };
+    try {
+      const response = await fetch("http://localhost:3001/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
 
+      if (response.ok) {
+        setValid(true);
+        setSubmitted(true);
+        navigate("/login");
+        } else {
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
   return (
     <div className="form-container">
       <form className="register-form" onSubmit={handleSubmit}>
