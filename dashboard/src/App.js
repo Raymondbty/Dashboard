@@ -9,10 +9,8 @@ import Discord from "./Discord";
 
 const App = () => {
   const handleDiscordRedirect = (params) => {
-    // Insérez ici la logique pour gérer les paramètres de redirection Discord
     console.log('Redirect params:', params);
 
-    // Par exemple, redirigez vers la page Discord après une authentification réussie
     return <Navigate to="/dashboard/discord" />;
   };
 
@@ -23,7 +21,6 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/discord" element={<Discord />} />
-        <Route path="/discord/callback" element={<DiscordServiceRedirect />} />
       </Routes>
     </Router>
   );
