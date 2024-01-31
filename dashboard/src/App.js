@@ -5,22 +5,16 @@ import "./styles.css";
 import Login from "./Login";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
-import Discord from "./Discord";
+import Weather from "./Weather";
 
 const App = () => {
-  const handleDiscordRedirect = (params) => {
-    console.log('Redirect params:', params);
-
-    return <Navigate to="/dashboard/discord" />;
-  };
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/discord" element={<Discord />} />
+        <Route path="/weather" element={<Weather />} />
       </Routes>
     </Router>
   );
