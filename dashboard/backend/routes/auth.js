@@ -9,14 +9,20 @@ app.use(cors());
 
 const PORT = 3001;
 
-app.use(cors());
-// Route
+// Log when the server is started
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Route for registration
 app.post('/register', async (req, res) => {
+  console.log("Reached /register route");
   const { first_name, last_name, email, password } = req.body;
 
   try {
     const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
- // exist ?
+
+    // exist ?
     if (userExists.rows.length > 0) {
       return res.status(400).json({ message: 'User already exists with this email' });
     }
@@ -37,8 +43,9 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Route login
+// Route for login
 app.post('/login', async (req, res) => {
+  console.log("Reached /login route");
   const { email, password } = req.body;
 
   try {
@@ -56,17 +63,12 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    // bonus : token
-
+    // bonus: token
     res.status(200).json({ message: 'Login successful' });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-});
-
-app.listen(3001, () => {
-  console.log(`Server is running on http://localhost:3001`);
 });
 
 module.exports = app;

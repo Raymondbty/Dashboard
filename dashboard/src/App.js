@@ -6,6 +6,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Weather from "./Weather";
+import Discord from "./Discord";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/discord" element={<Discord />} />
       </Routes>
     </Router>
   );

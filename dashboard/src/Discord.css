@@ -1,0 +1,15 @@
+.discord-service-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .discord-service-container img {
+    width: 150px;
+  }
+  
+  .discord-service-container h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #7289da;
+  }
+  

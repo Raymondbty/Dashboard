@@ -21,26 +21,18 @@ export default function Login() {
 
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
-
-  const handleSubmit = async (e) => {
+  
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
+    // Your form validation logic
+    const isFormValid = values.firstName && values.lastName && values.email;
 
-      if (response.ok) {
-        console.log('Login successful');
-      } else {
-        console.error('Login failed');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
+    setValid(isFormValid);
+
+    if (isFormValid) {
+      setSubmitted(true);
+      // Additional logic can be added here if needed
     }
   };
 
