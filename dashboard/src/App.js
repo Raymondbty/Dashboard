@@ -7,18 +7,25 @@ import Register from "./Register";
 import Dashboard from "./Dashboard";
 import Weather from "./Weather";
 import Discord from "./Discord";
+import Widgets from "./Widgets";
+
+import { AppProvider } from './AppContext';
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/weather" element={<Weather />} />
-        <Route path="/discord" element={<Discord />} />
-      </Routes>
-    </Router>
+    <AppProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/weather" element={<Weather />} />
+          <Route path="/discord" element={<Discord />} />
+          <Route path="/widgets" element={<Widgets />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </AppProvider>
   );
 };
 

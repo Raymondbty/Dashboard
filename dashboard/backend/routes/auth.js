@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const pool = require('../db');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,50 @@ const PORT = 3001;
 // Log when the server is started
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Discord OAuth2 configuration
+const discordClientId = '1170627038776934400';
+const discordClientSecret = 'jjEdsFomjDu1zwQH3BT8wxxEE5txEho2';
+const discordRedirectUri = 'http://localhost:3001/auth/discord/callback';
+
+// Route for initiating Discord authentication
+app.get('/auth/discord', (req, res) => {
+  res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${discordClientId}&redirect_uri=${discordRedirectUri}&response_type=code&scope=identify%20email`);
+});
+
+// Callback route for Discord OAuth2
+app.get('/auth/discord/callback', async (req, res) => {
+  const code = req.query.code;
+
+  // Exchange code for access token
+  try {
+    const tokenResponse = await axios.post('https://discord.com/api/oauth2/token', {
+      client_id: discordClientId,
+      client_secret: discordClientSecret,
+      code: code,
+      redirect_uri: discordRedirectUri,
+      grant_type: 'authorization_code'
+    });
+
+    const accessToken = tokenResponse.data.access_token;
+
+    // Get user information using the access token
+    const userResponse = await axios.get('https://discord.com/api/users/@me', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    const { id, username, discriminator, email } = userResponse.data;
+
+    // Save or retrieve user in the database here using the obtained user information
+
+    res.json({ id, username, discriminator, email });
+  } catch (error) {
+    console.error('Error during Discord callback:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 // Route for registration

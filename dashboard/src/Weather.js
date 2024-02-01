@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import weatherIcon from './weather.png';
 import './Weather.css';
+import { useAppContext } from './AppContext';
 
 const Weather = () => {
+  const { dispatch } = useAppContext();
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
 
@@ -18,6 +20,11 @@ const Weather = () => {
       );
 
       setWeatherData(response.data);
+
+      dispatch({
+        type: 'ADD_WEATHER_REQUEST',
+        payload: { city, timestamp: Date.now() },
+      });
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
