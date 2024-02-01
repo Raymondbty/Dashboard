@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useAppContext } from './AppContext';
 import axios from 'axios';
+import pencilIcon from './pencil.png';
+import crossIcon from './cross.png';
+import './Widgets.css';
 
 const Widgets = () => {
   const { state, dispatch } = useAppContext();
@@ -48,15 +51,21 @@ const Widgets = () => {
                   value={newCity}
                   onChange={(e) => setNewCity(e.target.value)}
                 />
-                <button onClick={() => handleUpdateWeather(index, newCity)}>Update</button>
+                <button onClick={() => handleUpdateWeather(index, newCity)}>
+                  <img src={pencilIcon} alt="Edit" />
+                </button>
               </div>
             ) : (
               <div>
                 {request.city}, {new Date(request.timestamp).toLocaleString()} <br />
                 Temperature: {request.data.main.temp} K <br />
                 Description: {request.data.weather[0].description}
-                <button onClick={() => handleEdit(index)}>Edit</button>
-                <button onClick={() => handleDelete(index)}>Delete</button>
+                <button onClick={() => handleEdit(index)}>
+                  <img src={pencilIcon} alt="Edit" />
+                </button>
+                <button onClick={() => handleDelete(index)}>
+                  <img src={crossIcon} alt="Delete" />
+                </button>
               </div>
             )}
           </li>
