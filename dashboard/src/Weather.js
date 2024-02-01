@@ -23,7 +23,7 @@ const Weather = () => {
 
       dispatch({
         type: 'ADD_WEATHER_REQUEST',
-        payload: { city, timestamp: Date.now() },
+        payload: { city, timestamp: Date.now(), data: response.data },
       });
     } catch (error) {
       console.error('Error fetching weather data:', error);

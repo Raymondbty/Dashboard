@@ -7,16 +7,21 @@ const initialState = {
 };
 
 const appReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_WEATHER_REQUEST':
-      return {
-        ...state,
-        weatherRequests: [...state.weatherRequests, action.payload],
-      };
-    default:
-      return state;
-  }
-};
+    switch (action.type) {
+      case 'ADD_WEATHER_REQUEST':
+        return {
+          ...state,
+          weatherRequests: [...state.weatherRequests, action.payload],
+        };
+      case 'DELETE_WEATHER_REQUEST':
+        return {
+          ...state,
+          weatherRequests: state.weatherRequests.filter((_, index) => index !== action.payload.index),
+        };
+      default:
+        return state;
+    }
+  };
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
