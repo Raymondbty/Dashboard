@@ -18,6 +18,15 @@ const appReducer = (state, action) => {
           ...state,
           weatherRequests: state.weatherRequests.filter((_, index) => index !== action.payload.index),
         };
+      case 'UPDATE_WEATHER_REQUEST':
+        return {
+          ...state,
+          weatherRequests: state.weatherRequests.map((request, index) => (
+            index === action.payload.index
+              ? { ...request, city: action.payload.newCity, data: action.payload.newData }
+              : request
+          )),
+        };
       default:
         return state;
     }
