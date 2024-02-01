@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  background-color: rgb(166, 45, 203);
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.item {
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+}
