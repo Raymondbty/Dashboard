@@ -36,7 +36,6 @@ const YouTube = () => {
   const handleGetVideoStats = async () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
-
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${apiKey}`
       );
@@ -58,8 +57,8 @@ const YouTube = () => {
   ];
 
   return (
-    <div>
-      <div>
+    <div style={{ padding: '20px', background: '#f0f0f0', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
+      <div style={{ marginBottom: '20px' }}>
         <label htmlFor="channelInput">Choose your channel:</label>
         <input
           type="text"
@@ -67,17 +66,20 @@ const YouTube = () => {
           value={channelId}
           onChange={handleChannelChange}
           placeholder="Enter channel ID"
+          style={{ marginRight: '10px' }}
         />
         <button onClick={handleGetChannelSubscribers}>Get Subscribers</button>
       </div>
 
       {subscribersCount !== null && (
-        <div>
-          <p>Subscribers count for {channelId}: {subscribersCount}</p>
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Subscribers count for {channelId}:</strong> {subscribersCount}
+          </p>
         </div>
       )}
 
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <label htmlFor="videoInput">Enter video ID:</label>
         <input
           type="text"
@@ -85,23 +87,30 @@ const YouTube = () => {
           value={videoId}
           onChange={handleVideoChange}
           placeholder="Enter video ID"
+          style={{ marginRight: '10px' }}
         />
         <button onClick={handleGetVideoStats}>Get Video Stats</button>
       </div>
 
       {viewsCount !== null && (
-        <div>
-          <p>Views count for video {videoId}: {viewsCount}</p>
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Views count for video {videoId}:</strong> {viewsCount}
+          </p>
         </div>
       )}
       {commentsCount !== null && (
-        <div>
-          <p>Comments count for video {videoId}: {commentsCount}</p>
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Comments count for video {videoId}:</strong> {commentsCount}
+          </p>
         </div>
       )}
       {likesCount !== null && (
-        <div>
-          <p>Likes count for video {videoId}: {likesCount}</p>
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Likes count for video {videoId}:</strong> {likesCount}
+          </p>
         </div>
       )}
 
