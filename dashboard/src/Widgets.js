@@ -1,9 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from './AppContext';
 import axios from 'axios';
+import { RiMistFill } from "react-icons/ri";
+import { CiCloudSun, CiCloud, CiCloudDrizzle, CiSun } from "react-icons/ci";
 import pencilIcon from './pencil.png';
 import crossIcon from './cross.png';
-import './Widgets.css'
+import { FaRegSnowflake } from "react-icons/fa";
+import { LuWind } from "react-icons/lu";
+import './Widgets.css';
 
 const Widgets = () => {
   const { state, dispatch } = useAppContext();
@@ -62,11 +67,40 @@ const Widgets = () => {
     return () => clearInterval(intervalId);
   }, [state.weatherRequests]);
 
+  const getWeatherIcon = (weatherDescription) => {
+    let iconClassName = "weather-icons";
+  
+    switch (weatherDescription) {
+      case 'Clear':
+        iconClassName = "weather-icon-clear";
+        return <CiSun className={iconClassName} />;
+      case 'Clouds':
+        iconClassName = "weather-icon-clouds";
+        return <CiCloud className={iconClassName} />;
+      case 'Rain':
+        iconClassName = "weather-icon-rain";
+        return <CiCloudDrizzle className={iconClassName} />;
+      case 'Snow':
+        iconClassName = "weather-icon-snow";
+        return <FaRegSnowflake className={iconClassName} />;
+      case 'Wind':
+        iconClassName = "weather-icon-wind";
+        return <LuWind className={iconClassName} />;
+      case 'Mist':
+        iconClassName = "weather-icon-mist";
+        return <RiMistFill className={iconClassName} />;
+      case 'CloudSun':
+        return <CiCloudSun className={iconClassName} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <ul>
         {state.weatherRequests.map((request, index) => (
-          <li key={index} className={editingIndex === index ? 'editing-container' : ''}>
+          <li key={index} className={editingIndex === index ? 'editing-container' : 'weather-service-container'}>
             {editingIndex === index ? (
               <div>
                 <input
@@ -82,6 +116,7 @@ const Widgets = () => {
               </div>
             ) : (
               <div>
+                {getWeatherIcon(request.data.weather[0].main)} {/* Utilisation de l'icône météo */}
                 {request.city}, {new Date(request.timestamp).toLocaleString()} <br />
                 Temperature: {request.data.main.temp} K <br />
                 Description: {request.data.weather[0].description}

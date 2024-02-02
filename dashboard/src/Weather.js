@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from './AppContext';
-import { FaSun, FaCloud, FaCloudRain, FaSnowflake, FaWind, FaMist } from "react-icons/fa";
 import { RiMistFill } from "react-icons/ri";
 import { CiCloudSun, CiCloud, CiCloudDrizzle, CiSun } from "react-icons/ci";
 import { FaRegSnowflake } from "react-icons/fa";

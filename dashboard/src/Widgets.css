@@ -3,12 +3,59 @@ ul {
   padding: 0;
 }
 
-li {
+.weather-service-container {
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout de l'ombre */
+}
+
+.weather-input-container {
   margin-bottom: 20px;
 }
 
+.weather-data-container {
+  margin-top: 20px;
+}
+
+.weather-icon {
+  margin-top: 80px;
+  width: 50px; /* Taille par défaut */
+}
+
+/* Ajoutez des styles spécifiques à chaque icône météo au besoin */
+.weather-icon-clear {
+  width: 60px;
+}
+
+.weather-icon-clouds {
+  width: 70px;
+}
+
+.weather-icon-rain {
+  width: 80px;
+}
+
+.weather-icon-snow {
+  width: 80px;
+}
+
+.weather-icon-wind {
+  width: 80px;
+}
+
+.weather-icon-mist {
+  width: 150px;
+}
+
 .editing-container {
-  margin-bottom: 10px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .edit-buttons button {
