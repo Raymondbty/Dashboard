@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppContext } from './AppContext';
 import axios from 'axios';
-import './Widgets.css';
 import pencilIcon from './pencil.png';
 import crossIcon from './cross.png';
+import './Widgets.css'
 
 const Widgets = () => {
   const { state, dispatch } = useAppContext();
@@ -37,6 +37,30 @@ const Widgets = () => {
       payload: { index },
     });
   };
+
+  const updateWidgetsPeriodically = async () => {
+    for (let i = 0; i < state.weatherRequests.length; i++) {
+      const request = state.weatherRequests[i];
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${request.city}&appid=ad6e12e12b001e5b3e58fc461af326d9`
+        );
+
+        dispatch({
+          type: 'UPDATE_WEATHER_REQUEST',
+          payload: { index: i, newCity: request.city, newData: response.data },
+        });
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(updateWidgetsPeriodically, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [state.weatherRequests]);
 
   return (
     <div>
