@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 const initialState = {
   weatherRequests: [],
+  youtubeRequests: [],
 };
 
 const appReducer = (state, action) => {
@@ -27,6 +28,16 @@ const appReducer = (state, action) => {
               : request
           )),
         };
+      case 'ADD_YOUTUBE_REQUEST':
+          return {
+              ...state,
+              youtubeRequests: [...state.youtubeRequests, action.payload],
+          };
+      case 'DELETE_YOUTUBE_REQUEST':
+          return {
+              ...state,
+              youtubeRequests: state.youtubeRequests.filter((_, index) => index !== action.payload.index),
+          };
       default:
         return state;
     }

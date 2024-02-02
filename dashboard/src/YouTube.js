@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useAppContext } from './AppContext';
 
 const YouTube = () => {
+  const { dispatch } = useAppContext();  
   const [channelId, setChannelId] = useState('');
   const [videoId, setVideoId] = useState('');
   const [subscribersCount, setSubscribersCount] = useState(null);
@@ -33,6 +35,22 @@ const YouTube = () => {
 
       setSubscribersCount(subsCount);
       setChannelName(name);
+
+      dispatch({
+        type: 'ADD_YOUTUBE_REQUEST',
+        payload: {
+            channelId,
+            timestamp: Date.now(),
+            data: {
+                subscribersCount,
+                viewsCount,
+                commentsCount,
+                likesCount,
+                channelName,
+                videoName,
+            },
+        },
+    });
     } catch (error) {
       console.error('Error fetching channel information:', error);
     }
