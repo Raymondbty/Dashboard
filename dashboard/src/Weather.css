@@ -21,5 +21,29 @@
 }
 
 .weather-icon {
-  width: 50px;
+  margin-top: 80px;
+}
+
+.weather-icon-clear {
+  width: 60px;
+}
+
+.weather-icon-clouds {
+  width: 70px;
+}
+
+.weather-icon-rain {
+  width: 80px;
+}
+
+.weather-icon-snow {
+  width: 80px;
+}
+
+.weather-icon-wind {
+  width: 80px;
+}
+
+.weather-icon-mist {
+  width: 150px;
 }
