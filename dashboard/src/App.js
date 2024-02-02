@@ -8,7 +8,7 @@ import Dashboard from "./Dashboard";
 import Weather from "./Weather";
 import Discord from "./Discord";
 import Widgets from "./Widgets";
-
+import YouTube from "./YouTube";
 import { AppProvider } from './AppContext';
 
 const App = () => {
@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/weather" element={<Weather />} />
           <Route path="/discord" element={<Discord />} />
           <Route path="/widgets" element={<Widgets />} />
+          <Route path="/youtube" element={<YouTube />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import weatherIcon from './weather.png';
 import discordIcon from './discord.png';
 import widgetsIcon from './widget.png';
+import youtubeIcon from './youtube.png';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -20,6 +21,10 @@ const Dashboard = () => {
     navigate('/widgets');
   };
 
+  const redirectToYouTube = () => {
+    navigate('/youtube');
+  };
+
   return (
     <div className="container">
       <div className="item" onClick={redirectToWeather}>
@@ -33,6 +38,10 @@ const Dashboard = () => {
       <div className="item" onClick={redirectToWidgets}>
         <img src={widgetsIcon} alt="Widgets" width="100" height="100" />
         <p>Widgets</p>
+      </div>
+      <div className="item" onClick={redirectToYouTube}>
+        <img src={youtubeIcon} alt="YouTube" width="100" height="100" />
+        <p>YouTube</p>
       </div>
     </div>
   );
