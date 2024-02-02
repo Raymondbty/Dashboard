@@ -9,6 +9,8 @@ const YouTube = () => {
   const [viewsCount, setViewsCount] = useState(null);
   const [commentsCount, setCommentsCount] = useState(null);
   const [likesCount, setLikesCount] = useState(null);
+  const [channelName, setChannelName] = useState('');
+  const [videoName, setVideoName] = useState('');
 
   const handleChannelChange = (e) => {
     setChannelId(e.target.value);
@@ -21,13 +23,16 @@ const YouTube = () => {
   const handleGetChannelSubscribers = async () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
-
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`
+        `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
       );
 
-      const subsCount = response.data.items[0]?.statistics.subscriberCount;
+      const channelData = response.data.items[0];
+      const subsCount = channelData.statistics.subscriberCount;
+      const name = channelData.snippet.title;
+
       setSubscribersCount(subsCount);
+      setChannelName(name);
     } catch (error) {
       console.error('Error fetching channel information:', error);
     }
@@ -36,14 +41,21 @@ const YouTube = () => {
   const handleGetVideoStats = async () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
+
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${apiKey}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
       );
 
-      const videoStats = response.data.items[0]?.statistics;
-      setViewsCount(videoStats?.viewCount);
-      setCommentsCount(videoStats?.commentCount);
-      setLikesCount(videoStats?.likeCount);
+      const videoData = response.data.items[0];
+      const viewsCount = videoData.statistics.viewCount;
+      const commentsCount = videoData.statistics.commentCount;
+      const likesCount = videoData.statistics.likeCount;
+      const name = videoData.snippet.title;
+
+      setViewsCount(viewsCount);
+      setCommentsCount(commentsCount);
+      setLikesCount(likesCount);
+      setVideoName(name);
     } catch (error) {
       console.error('Error fetching video information:', error);
     }
@@ -74,7 +86,7 @@ const YouTube = () => {
       {subscribersCount !== null && (
         <div style={{ marginBottom: '20px' }}>
           <p>
-            <strong>Subscribers count for {channelId}:</strong> {subscribersCount}
+            <strong>Subscribers count for {channelName}:</strong> {subscribersCount}
           </p>
         </div>
       )}
@@ -95,21 +107,21 @@ const YouTube = () => {
       {viewsCount !== null && (
         <div style={{ marginBottom: '20px' }}>
           <p>
-            <strong>Views count for video {videoId}:</strong> {viewsCount}
+            <strong>Views count for video {videoName}:</strong> {viewsCount}
           </p>
         </div>
       )}
       {commentsCount !== null && (
         <div style={{ marginBottom: '20px' }}>
           <p>
-            <strong>Comments count for video {videoId}:</strong> {commentsCount}
+            <strong>Comments count for video {videoName}:</strong> {commentsCount}
           </p>
         </div>
       )}
       {likesCount !== null && (
         <div style={{ marginBottom: '20px' }}>
           <p>
-            <strong>Likes count for video {videoId}:</strong> {likesCount}
+            <strong>Likes count for video {videoName}:</strong> {likesCount}
           </p>
         </div>
       )}
