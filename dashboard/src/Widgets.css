@@ -1,11 +1,24 @@
-button {
-    background-color: white;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-  
-  button img {
-    width: 20px;
-    height: 20px;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
+.editing-container {
+  margin-bottom: 10px;
+}
+
+.edit-buttons button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.edit-buttons button img {
+  width: 20px;
+  height: 20px;
+}

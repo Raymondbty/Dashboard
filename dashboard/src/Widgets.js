@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAppContext } from './AppContext';
 import axios from 'axios';
+import './Widgets.css';
 import pencilIcon from './pencil.png';
 import crossIcon from './cross.png';
-import './Widgets.css';
 
 const Widgets = () => {
   const { state, dispatch } = useAppContext();
@@ -40,10 +40,9 @@ const Widgets = () => {
 
   return (
     <div>
-      <h2>Saved Weather Requests</h2>
       <ul>
         {state.weatherRequests.map((request, index) => (
-          <li key={index}>
+          <li key={index} className={editingIndex === index ? 'editing-container' : ''}>
             {editingIndex === index ? (
               <div>
                 <input
@@ -51,21 +50,25 @@ const Widgets = () => {
                   value={newCity}
                   onChange={(e) => setNewCity(e.target.value)}
                 />
-                <button onClick={() => handleUpdateWeather(index, newCity)}>
-                  <img src={pencilIcon} alt="Edit" />
-                </button>
+                <div className="edit-buttons">
+                  <button onClick={() => handleUpdateWeather(index, newCity)}>
+                    <img src={pencilIcon} alt="Edit" />
+                  </button>
+                </div>
               </div>
             ) : (
               <div>
                 {request.city}, {new Date(request.timestamp).toLocaleString()} <br />
                 Temperature: {request.data.main.temp} K <br />
                 Description: {request.data.weather[0].description}
-                <button onClick={() => handleEdit(index)}>
-                  <img src={pencilIcon} alt="Edit" />
-                </button>
-                <button onClick={() => handleDelete(index)}>
-                  <img src={crossIcon} alt="Delete" />
-                </button>
+                <div className="edit-buttons">
+                  <button onClick={() => handleEdit(index)}>
+                    <img src={pencilIcon} alt="Edit" />
+                  </button>
+                  <button onClick={() => handleDelete(index)}>
+                    <img src={crossIcon} alt="Delete" />
+                  </button>
+                </div>
               </div>
             )}
           </li>
