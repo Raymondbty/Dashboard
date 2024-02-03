@@ -57,10 +57,7 @@ const Widgets = () => {
 
   const handleUpdateWeather = async (index, city) => {
     try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ad6e12e12b001e5b3e58fc461af326d9`
-      );
-
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ad6e12e12b001e5b3e58fc461af326d9`);
       dispatch({
         type: 'UPDATE_WEATHER_REQUEST',
         payload: { index, newCity: city, newData: response.data },
@@ -86,14 +83,10 @@ const Widgets = () => {
   const handleUpdateYouTube = async (index, channelId) => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
-      const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
-      );
-  
+      const response = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`);
       const channelData = response.data.items[0];
       const subsCount = channelData.statistics.subscriberCount;
       const channelName = channelData.snippet.title;
-  
   
       dispatch({
         type: 'UPDATE_YOUTUBE_REQUEST',
@@ -125,7 +118,6 @@ const Widgets = () => {
     setNewVideoId(state.youtubeStatsRequests[index].videoId);
   };
 
-
   const handleUpdateYouTubeStats = async (index, videoId) => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
@@ -133,33 +125,41 @@ const Widgets = () => {
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
       );
-      const videoData = response.data.items[0];
-      const viewsCount = videoData.statistics.viewCount;
-      const commentsCount = videoData.statistics.commentCount;
-      const likesCount = videoData.statistics.likeCount;
-      const name = videoData.snippet.title;
   
-      dispatch({
-        type: 'UPDATE_YOUTUBE_STATS_REQUEST',
-        payload: {
-          index,
-          newVideoId: videoId,
-          newData: {
-            viewsCount,
-            commentsCount,
-            likesCount,
-            videoName: name,
-          },
-        },
-      });
+      if (response.data && response.data.items && response.data.items.length > 0) {
+        const videoData = response.data.items[0];
+        const viewsCount = videoData.statistics && videoData.statistics.viewCount;
+        const commentsCount = videoData.statistics && videoData.statistics.commentCount;
+        const likesCount = videoData.statistics && videoData.statistics.likeCount;
+        const name = videoData.snippet && videoData.snippet.title;
   
-      setNewVideoId(videoId);
-      setEditingYouTubeStatsIndex(null);
+        if (viewsCount !== undefined && commentsCount !== undefined && likesCount !== undefined && name) {
+          dispatch({
+            type: 'UPDATE_YOUTUBE_STATS_REQUEST',
+            payload: {
+              index,
+              newVideoId: videoId,
+              newData: {
+                viewsCount,
+                commentsCount,
+                likesCount,
+                videoName: name,
+              },
+            },
+          });
+  
+          setNewVideoId(videoId);
+          setEditingYouTubeStatsIndex(null);
+        } else {
+          console.error('Error fetching video information: Video data is incomplete');
+        }
+      } else {
+        console.error('Error fetching video information: Video data is undefined');
+      }
     } catch (error) {
       console.error('Error fetching video information:', error);
     }
   };
-
   const handleDeleteYouTubeStatsRequest = (index) => {
     dispatch({
       type: 'DELETE_YOUTUBE_STATS_REQUEST',
@@ -167,16 +167,36 @@ const Widgets = () => {
     });
   };
 
-  const updateWidgetsPeriodically = async () => {
-    // TODO: timer
+  const updateAllWidgets = async () => {
+    console.log('Updating weather requests...');
+    for (let i = 0; i < state.weatherRequests.length; i++) {
+      const request = state.weatherRequests[i];
+      await handleUpdateWeather(i, request.city);
+    }
+    console.log('Weather requests updated.');
+  
+    console.log('Updating YouTube requests...');
+    for (let i = 0; i < state.youtubeRequests.length; i++) {
+      const request = state.youtubeRequests[i];
+      await handleUpdateYouTube(i, request.channelId);
+    }
+    console.log('YouTube requests updated.');
+  
+    console.log('Updating YouTube stats requests...');
+    console.log('YouTube stats requests updated.');
   };
 
   useEffect(() => {
-    const intervalId = setInterval(updateWidgetsPeriodically, 60000);
-
+    updateAllWidgets();
+  
+    const intervalId = setInterval(() => {
+      updateAllWidgets();
+      console.log('All widgets updated.');
+    }, 60000);
+  
     return () => clearInterval(intervalId);
-  }, [state.weatherRequests, state.youtubeRequests]);
-
+  }, []);
+  
   return (
     <div>
       <ul>
@@ -240,7 +260,7 @@ const Widgets = () => {
             )}
           </li>
         ))}
-   {state.youtubeStatsRequests.map((request, index) => (
+        {state.youtubeStatsRequests.map((request, index) => (
           <li key={index} className={editingYouTubeStatsIndex === index ? 'editing-container' : 'youtube-stats-container'}>
             {editingYouTubeStatsIndex === index ? (
               <div>
