@@ -47,6 +47,8 @@ const Widgets = () => {
   const [newCity, setNewCity] = useState('');
   const [editingYouTubeIndex, setEditingYouTubeIndex] = useState(null);
   const [newChannelId, setNewChannelId] = useState('');
+  const [editingYouTubeStatsIndex, setEditingYouTubeStatsIndex] = useState(null);
+  const [newVideoId, setNewVideoId] = useState('');
 
   const handleEdit = (index) => {
     setEditingIndex(index);
@@ -116,6 +118,31 @@ const Widgets = () => {
       type: 'DELETE_YOUTUBE_REQUEST',
       payload: { index },
     });
+  };
+
+  const handleEditYouTubeStats = (index) => {
+    setEditingYouTubeStatsIndex(index);
+    setNewVideoId(state.youtubeStatsRequests[index].videoId);
+  };
+
+  const handleUpdateYouTubeStats = async (index, videoId) => {
+    try {
+      // ...
+
+      dispatch({
+        type: 'UPDATE_YOUTUBE_STATS_REQUEST',
+        payload: {
+          index,
+          newVideoId: videoId,
+          newData: {
+          },
+        },
+      });
+
+      setEditingYouTubeStatsIndex(null);
+    } catch (error) {
+      console.error('Error updating YouTube stats data:', error);
+    }
   };
 
   const handleDeleteYouTubeStatsRequest = (index) => {
@@ -199,24 +226,38 @@ const Widgets = () => {
           </li>
         ))}
    {state.youtubeStatsRequests.map((request, index) => (
-          <li key={index} className='youtube-stats-container'>
-            <div className='youtube-stats-card'>
-              <p>
-                <strong>Video:</strong> {request.data.videoName} |{' '}
-                <strong>Views:</strong> {request.data.viewsCount} |{' '}
-                <strong>Comments:</strong> {request.data.commentsCount} |{' '}
-                <strong>Likes:</strong> {request.data.likesCount}
-              </p>
-              <p>
-                <strong>Timestamp:</strong>{' '}
-                {new Date(request.timestamp).toLocaleString()}
-              </p>
-              <div className='edit-buttons'>
-                <button onClick={() => handleDeleteYouTubeStatsRequest(index)}>
-                  <img src={crossIcon} alt='Delete' />
-                </button>
+          <li key={index} className={editingYouTubeStatsIndex === index ? 'editing-container' : 'youtube-stats-container'}>
+            {editingYouTubeStatsIndex === index ? (
+              <div>
+                <input type='text' value={newVideoId} onChange={(e) => setNewVideoId(e.target.value)} />
+                <div className='edit-buttons'>
+                  <button onClick={() => handleUpdateYouTubeStats(index, newVideoId)}>
+                    <img src={pencilIcon} alt='Edit' />
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className='youtube-stats-card'>
+                <p>
+                  <strong>Video:</strong> {request.data.videoName} |{' '}
+                  <strong>Views:</strong> {request.data.viewsCount} |{' '}
+                  <strong>Comments:</strong> {request.data.commentsCount} |{' '}
+                  <strong>Likes:</strong> {request.data.likesCount}
+                </p>
+                <p>
+                  <strong>Timestamp:</strong>{' '}
+                  {new Date(request.timestamp).toLocaleString()}
+                </p>
+                <div className='edit-buttons'>
+                  <button onClick={() => handleEditYouTubeStats(index)}>
+                    <img src={pencilIcon} alt='Edit' />
+                  </button>
+                  <button onClick={() => handleDeleteYouTubeStatsRequest(index)}>
+                    <img src={crossIcon} alt='Delete' />
+                  </button>
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
