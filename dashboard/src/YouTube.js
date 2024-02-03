@@ -44,11 +44,7 @@ const YouTube = () => {
           timestamp: Date.now(),
           data: {
             subscribersCount: subsCount,
-            viewsCount,
-            commentsCount,
-            likesCount,
             channelName,
-            videoName,
           },
         },
       });
@@ -56,7 +52,6 @@ const YouTube = () => {
       console.error('Error fetching channel information:', error);
     }
   };
-  
 
   const handleGetVideoStats = async () => {
     try {
@@ -104,33 +99,33 @@ const YouTube = () => {
       </div>
 
       {subscribersCount !== null && (
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Subscribers count for {channelName}:</strong> {subscribersCount}
+          </p>
+        </div>
+      )}
+
+      {channelName !== '' && (
+        <div style={{ marginBottom: '20px' }}>
+          <p>
+            <strong>Channel name:</strong> {channelName}
+          </p>
+        </div>
+      )}
+
       <div style={{ marginBottom: '20px' }}>
-        <p>
-          <strong>Subscribers count for {channelName}:</strong> {subscribersCount}
-        </p>
+        <label htmlFor="videoInput">Enter video ID:</label>
+        <input
+          type="text"
+          id="videoInput"
+          value={videoId}
+          onChange={handleVideoChange}
+          placeholder="Enter video ID"
+          style={{ marginRight: '10px' }}
+        />
+        <button onClick={handleGetVideoStats}>Get Video Stats</button>
       </div>
-    )}
-
-    {channelName !== '' && (
-          <div style={{ marginBottom: '20px' }}>
-            <p>
-              <strong>Channel name:</strong> {channelName}
-            </p>
-          </div>
-        )}
-
-<div style={{ marginBottom: '20px' }}>
-      <label htmlFor="videoInput">Enter video ID:</label>
-      <input
-        type="text"
-        id="videoInput"
-        value={videoId}
-        onChange={handleVideoChange}
-        placeholder="Enter video ID"
-        style={{ marginRight: '10px' }}
-      />
-      <button onClick={handleGetVideoStats}>Get Video Stats</button>
-    </div>
 
       {viewsCount !== null && (
         <div style={{ marginBottom: '20px' }}>

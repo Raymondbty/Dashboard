@@ -46,7 +46,7 @@ const Widgets = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [newCity, setNewCity] = useState('');
   const [editingYouTubeIndex, setEditingYouTubeIndex] = useState(null);
-  const [newChannelName, setNewChannelName] = useState('');
+  const [newChannelId, setNewChannelId] = useState(''); // Added newChannelId state
 
   const handleEdit = (index) => {
     setEditingIndex(index);
@@ -78,14 +78,37 @@ const Widgets = () => {
 
   const handleEditYouTube = (index) => {
     setEditingYouTubeIndex(index);
-    setNewChannelName(state.youtubeRequests[index].data.channelName);
+    setNewChannelId(state.youtubeRequests[index].channelId);
   };
 
-  const handleUpdateYouTube = (index, channelName) => {
-    // Implémentez la mise à jour de la demande YouTube ici (similaire à handleUpdateWeather)
-    // ...
-
-    setEditingYouTubeIndex(null);
+  const handleUpdateYouTube = async (index, channelId) => {
+    try {
+      const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
+      );
+  
+      const channelData = response.data.items[0];
+      const subsCount = channelData.statistics.subscriberCount;
+      const channelName = channelData.snippet.title;
+  
+  
+      dispatch({
+        type: 'UPDATE_YOUTUBE_REQUEST',
+        payload: {
+          index,
+          newChannelId: channelId,
+          newData: {
+            subscribersCount: subsCount,
+            channelName,
+          },
+        },
+      });
+  
+      setEditingYouTubeIndex(null);
+    } catch (error) {
+      console.error('Error updating YouTube data:', error);
+    }
   };
 
   const handleDeleteYouTubeRequest = (index) => {
@@ -141,9 +164,9 @@ const Widgets = () => {
           <li key={index} className={editingYouTubeIndex === index ? 'editing-container' : 'youtube-request-container youtube-subscribers-container'}>
             {editingYouTubeIndex === index ? (
               <div>
-                <input type='text' value={newChannelName} onChange={(e) => setNewChannelName(e.target.value)} />
+                <input type='text' value={newChannelId} onChange={(e) => setNewChannelId(e.target.value)} />
                 <div className='edit-buttons'>
-                  <button onClick={() => handleUpdateYouTube(index, newChannelName)}>
+                  <button onClick={() => handleUpdateYouTube(index, newChannelId)}>
                     <img src={pencilIcon} alt='Edit' />
                   </button>
                 </div>
