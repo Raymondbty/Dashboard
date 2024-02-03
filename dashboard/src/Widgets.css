@@ -137,3 +137,17 @@ ul {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
 }
+
+.youtube-stats-container {
+  margin-bottom: 20px !important;
+}
+
+.youtube-stats-card {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  text-align: center;
+  max-width: 400px;
+}

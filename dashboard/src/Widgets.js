@@ -193,7 +193,7 @@ const Widgets = () => {
         ))}
         {state.youtubeStatsRequests.map((stats, index) => (
           <li key={index} className='youtube-stats-container'>
-            <div>
+            <div className='youtube-stats-card'>
               <p>
                 <strong>Views:</strong> {stats.data.viewsCount} | <strong>Comments:</strong> {stats.data.commentsCount} | <strong>Likes:</strong> {stats.data.likesCount} | <strong>Video Name:</strong> {stats.data.videoName}
               </p>
