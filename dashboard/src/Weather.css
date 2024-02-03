@@ -8,32 +8,51 @@
 }
 
 .weather-service-container img {
-  width: 50px;
-  margin-bottom: 10px;
+  width: 40px!important;
+  margin-bottom: 10px!important;
 }
 
 .weather-input-container {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .weather-data-container {
-  margin-top: 20px;
+  margin-top: 80px;
+  text-align: center;
 }
 
 .weather-icon {
-  margin-top: 80px;
+  width: 80px!important;
+  height: 80px!important;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%)!important;
 }
 
 .weather-icon-clear {
-  width: 60px;
-}
+  width: 80px;
+  height: 80px;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%);}
 
 .weather-icon-clouds {
-  width: 70px;
-}
+  width: 80px;
+  height: 80px;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%);}
 
 .weather-icon-rain {
-  width: 80px;
+  width: 80px!important;
+  height: 80px!important;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%)!important;
 }
 
 .weather-icon-snow {
@@ -45,5 +64,19 @@
 }
 
 .weather-icon-mist {
-  width: 150px;
+  width: 80px;
+  height: 80px;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%);
+}
+
+.weather-icon-drizzle {
+  width: 80px;
+  height: 80px;
+  position: relative!important;
+  top: 50%!important; 
+  left: 40%!important;
+  transform: translate(-50%, -200%)!important;
 }
