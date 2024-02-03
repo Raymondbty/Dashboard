@@ -11,9 +11,18 @@ ul {
   padding: 5px;
 }
 
-.weather-service-container .edit-buttons button img {
-  width: 80px;
-  height: 80px;
+.weather-service-container {
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .weather-input-container {
@@ -26,31 +35,70 @@ ul {
 
 .weather-icon {
   margin-top: 80px;
-  width: 80px; /* Ajustez la taille par défaut */
+  width: 80px;
 }
 
 .weather-icon-clear {
-  width: 90px; /* Ajustez la taille spécifique pour l'icône Clear */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-clouds {
-  width: 100px; /* Ajustez la taille spécifique pour l'icône Clouds */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-rain {
-  width: 110px; /* Ajustez la taille spécifique pour l'icône Rain */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-snow {
-  width: 110px; /* Ajustez la taille spécifique pour l'icône Snow */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-wind {
-  width: 110px; /* Ajustez la taille spécifique pour l'icône Wind */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-mist {
-  width: 170px; /* Ajustez la taille spécifique pour l'icône Mist */
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
+}
+
+.weather-icon-drizzle {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
 }
 
 .editing-container {
@@ -68,8 +116,8 @@ ul {
 }
 
 .edit-buttons button img {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
 }
 
 .youtube-subscribers-container {
