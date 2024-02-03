@@ -53,7 +53,7 @@ export default function Login() {
           <input
             className="form-field"
             type="text"
-            placeholder="Firt Name"
+            placeholder="First Name"
             name="firstName"
             value={values.firstName}
             onChange={handleInputChange}
