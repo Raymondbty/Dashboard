@@ -118,6 +118,13 @@ const Widgets = () => {
     });
   };
 
+  const handleDeleteYouTubeStatsRequest = (index) => {
+    dispatch({
+      type: 'DELETE_YOUTUBE_STATS_REQUEST',
+      payload: { index },
+    });
+  };
+
   const updateWidgetsPeriodically = async () => {
     // TODO: timer
   };
@@ -191,15 +198,24 @@ const Widgets = () => {
             )}
           </li>
         ))}
-        {state.youtubeStatsRequests.map((stats, index) => (
+   {state.youtubeStatsRequests.map((request, index) => (
           <li key={index} className='youtube-stats-container'>
             <div className='youtube-stats-card'>
               <p>
-                <strong>Views:</strong> {stats.data.viewsCount} | <strong>Comments:</strong> {stats.data.commentsCount} | <strong>Likes:</strong> {stats.data.likesCount} | <strong>Video Name:</strong> {stats.data.videoName}
+                <strong>Video:</strong> {request.data.videoName} |{' '}
+                <strong>Views:</strong> {request.data.viewsCount} |{' '}
+                <strong>Comments:</strong> {request.data.commentsCount} |{' '}
+                <strong>Likes:</strong> {request.data.likesCount}
               </p>
               <p>
-                <strong>Timestamp:</strong> {new Date(stats.timestamp).toLocaleString()}
+                <strong>Timestamp:</strong>{' '}
+                {new Date(request.timestamp).toLocaleString()}
               </p>
+              <div className='edit-buttons'>
+                <button onClick={() => handleDeleteYouTubeStatsRequest(index)}>
+                  <img src={crossIcon} alt='Delete' />
+                </button>
+              </div>
             </div>
           </li>
         ))}

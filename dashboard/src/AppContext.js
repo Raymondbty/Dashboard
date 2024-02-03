@@ -53,6 +53,13 @@ const appReducer = (state, action) => {
           ...state,
           youtubeStatsRequests: [...state.youtubeStatsRequests, action.payload],
         };
+        case 'DELETE_YOUTUBE_STATS_REQUEST':
+          return {
+            ...state,
+            youtubeStatsRequests: state.youtubeStatsRequests.filter(
+              (request, index) => index !== action.payload.index
+            ),
+          };    
     default:
       return state;
   }
