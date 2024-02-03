@@ -125,23 +125,38 @@ const Widgets = () => {
     setNewVideoId(state.youtubeStatsRequests[index].videoId);
   };
 
+
   const handleUpdateYouTubeStats = async (index, videoId) => {
     try {
-      // ...
-
+      const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
+  
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
+      );
+      const videoData = response.data.items[0];
+      const viewsCount = videoData.statistics.viewCount;
+      const commentsCount = videoData.statistics.commentCount;
+      const likesCount = videoData.statistics.likeCount;
+      const name = videoData.snippet.title;
+  
       dispatch({
         type: 'UPDATE_YOUTUBE_STATS_REQUEST',
         payload: {
           index,
           newVideoId: videoId,
           newData: {
+            viewsCount,
+            commentsCount,
+            likesCount,
+            videoName: name,
           },
         },
       });
-
+  
+      setNewVideoId(videoId);
       setEditingYouTubeStatsIndex(null);
     } catch (error) {
-      console.error('Error updating YouTube stats data:', error);
+      console.error('Error fetching video information:', error);
     }
   };
 

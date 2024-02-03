@@ -53,6 +53,16 @@ const appReducer = (state, action) => {
           ...state,
           youtubeStatsRequests: [...state.youtubeStatsRequests, action.payload],
         };
+      
+      case 'UPDATE_YOUTUBE_STATS_REQUEST':
+        return {
+          ...state,
+          youtubeStatsRequests: state.youtubeStatsRequests.map((request, index) => (
+            index === action.payload.index
+              ? { ...request, videoId: action.payload.newVideoId, data: action.payload.newData }
+              : request
+          )),
+        };
         case 'DELETE_YOUTUBE_STATS_REQUEST':
           return {
             ...state,
