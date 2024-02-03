@@ -57,6 +57,9 @@ const Weather = () => {
         return <RiMistFill className={iconClassName} />;
       case 'CloudSun':
         return <CiCloudSun className={iconClassName} />;
+      case 'Drizzle':
+        iconClassName = 'weather-icon-drizzle';
+        return <CiCloudDrizzle className={iconClassName} />; 
       default:
         return null;
     }

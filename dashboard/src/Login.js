@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./Login.css";
 
 export default function Login() {
   const [values, setValues] = useState({
@@ -24,15 +24,13 @@ export default function Login() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Your form validation logic
+    // back todo
     const isFormValid = values.firstName && values.lastName && values.email;
 
     setValid(isFormValid);
 
     if (isFormValid) {
       setSubmitted(true);
-      // Additional logic can be added here if needed
     }
   };
 
@@ -55,7 +53,7 @@ export default function Login() {
           <input
             className="form-field"
             type="text"
-            placeholder="Firt Name"
+            placeholder="First Name"
             name="firstName"
             value={values.firstName}
             onChange={handleInputChange}
@@ -96,7 +94,7 @@ export default function Login() {
           <span id="email-error">Please enter an email address</span>
         )}
         {!valid && (
-          <button className="form-field" type="submit">
+          <button className="login-button" type="submit">
             Login
           </button>
         )}

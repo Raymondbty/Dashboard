@@ -1,54 +1,111 @@
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 10;
+  margin-right: 5px;
+}
+
+.weather-service-container .edit-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 10px;
 }
 
 .weather-service-container {
+  margin-bottom: 20px !important;
   padding: 20px;
   background: #f0f0f0;
-  border-radius: 10px;
+  border-radius: 40px;
   max-width: 400px;
   margin: auto;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout de l'ombre */
+  box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
+  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .weather-input-container {
-  margin-bottom: 20px;
+  margin-bottom: -80px;
 }
 
 .weather-data-container {
-  margin-top: 20px;
+  margin-top: 80px;
+  text-align: center;
 }
 
 .weather-icon {
-  margin-top: 80px;
-  width: 50px; /* Taille par défaut */
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
-/* Ajoutez des styles spécifiques à chaque icône météo au besoin */
 .weather-icon-clear {
-  width: 60px;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-clouds {
-  width: 70px;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-rain {
   width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-snow {
   width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-wind {
   width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .weather-icon-mist {
-  width: 150px;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
+}
+
+.weather-icon-drizzle {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -200%);
 }
 
 .editing-container {
@@ -66,6 +123,40 @@ ul {
 }
 
 .edit-buttons button img {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+.youtube-subscribers-container {
+  margin-bottom: 20px !important;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 40px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
+  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.youtube-stats-container {
+  margin-bottom: 20px !important;
+}
+
+.youtube-stats-card {
+  margin-bottom: 20px !important;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 40px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
+  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

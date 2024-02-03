@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import "./style.css";
-import "./styles.css";
+import "./Register.css";
+import "./Login.css";
 import Login from "./Login";
 import Register from "./Register";
 import Dashboard from "./Dashboard";
