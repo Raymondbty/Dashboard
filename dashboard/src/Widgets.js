@@ -7,6 +7,7 @@ import { RiMistFill } from 'react-icons/ri';
 import { CiCloudSun, CiCloud, CiCloudDrizzle, CiSun } from 'react-icons/ci';
 import { FaRegSnowflake } from 'react-icons/fa';
 import { LuWind } from 'react-icons/lu';
+import './Widgets.css';
 
 const getWeatherIcon = (weatherDescription) => {
   let iconClassName = 'weather-icons';
@@ -32,6 +33,9 @@ const getWeatherIcon = (weatherDescription) => {
       return <RiMistFill className={iconClassName} />;
     case 'CloudSun':
       return <CiCloudSun className={iconClassName} />;
+    case 'Drizzle':
+      iconClassName = 'weather-icon-drizzle';
+      return <CiCloudDrizzle className={iconClassName} />;  
     default:
       return null;
   }
@@ -119,9 +123,8 @@ const Widgets = () => {
             )}
           </li>
         ))}
-
         {state.youtubeRequests.map((request, index) => (
-          <li key={index} className='youtube-request-container'>
+          <li key={index} className='youtube-request-container youtube-subscribers-container'>
             <div>
               <p>
                 <strong>Channel:</strong> {request.data.channelName} | <strong>Subscribers:</strong> {request.data.subscribersCount}

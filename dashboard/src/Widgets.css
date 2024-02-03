@@ -3,52 +3,54 @@ ul {
   padding: 0;
 }
 
-.weather-service-container {
-  padding: 20px;
-  background: #f0f0f0;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout de l'ombre */
+.weather-service-container .edit-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.weather-service-container .edit-buttons button img {
+  width: 80px;
+  height: 80px;
 }
 
 .weather-input-container {
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
 .weather-data-container {
-  margin-top: 20px;
+  margin-top: 80px;
 }
 
 .weather-icon {
   margin-top: 80px;
-  width: 50px; /* Taille par défaut */
+  width: 80px; /* Ajustez la taille par défaut */
 }
 
-/* Ajoutez des styles spécifiques à chaque icône météo au besoin */
 .weather-icon-clear {
-  width: 60px;
+  width: 90px; /* Ajustez la taille spécifique pour l'icône Clear */
 }
 
 .weather-icon-clouds {
-  width: 70px;
+  width: 100px; /* Ajustez la taille spécifique pour l'icône Clouds */
 }
 
 .weather-icon-rain {
-  width: 80px;
+  width: 110px; /* Ajustez la taille spécifique pour l'icône Rain */
 }
 
 .weather-icon-snow {
-  width: 80px;
+  width: 110px; /* Ajustez la taille spécifique pour l'icône Snow */
 }
 
 .weather-icon-wind {
-  width: 80px;
+  width: 110px; /* Ajustez la taille spécifique pour l'icône Wind */
 }
 
 .weather-icon-mist {
-  width: 150px;
+  width: 170px; /* Ajustez la taille spécifique pour l'icône Mist */
 }
 
 .editing-container {
@@ -68,4 +70,15 @@ ul {
 .edit-buttons button img {
   width: 20px;
   height: 20px;
+}
+
+.youtube-subscribers-container {
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
