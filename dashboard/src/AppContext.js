@@ -5,6 +5,7 @@ const AppContext = createContext();
 const initialState = {
   weatherRequests: [],
   youtubeRequests: [],
+  youtubeStatsRequests: [],
 };
 
 const appReducer = (state, action) => {
@@ -47,6 +48,11 @@ const appReducer = (state, action) => {
             : request
         )),
       };
+      case 'ADD_YOUTUBE_STATS_REQUEST':
+        return {
+          ...state,
+          youtubeStatsRequests: [...state.youtubeStatsRequests, action.payload],
+        };
     default:
       return state;
   }

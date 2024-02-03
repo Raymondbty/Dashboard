@@ -46,7 +46,7 @@ const Widgets = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [newCity, setNewCity] = useState('');
   const [editingYouTubeIndex, setEditingYouTubeIndex] = useState(null);
-  const [newChannelId, setNewChannelId] = useState(''); // Added newChannelId state
+  const [newChannelId, setNewChannelId] = useState('');
 
   const handleEdit = (index) => {
     setEditingIndex(index);
@@ -189,6 +189,18 @@ const Widgets = () => {
                 </div>
               </div>
             )}
+          </li>
+        ))}
+        {state.youtubeStatsRequests.map((stats, index) => (
+          <li key={index} className='youtube-stats-container'>
+            <div>
+              <p>
+                <strong>Views:</strong> {stats.data.viewsCount} | <strong>Comments:</strong> {stats.data.commentsCount} | <strong>Likes:</strong> {stats.data.likesCount} | <strong>Video Name:</strong> {stats.data.videoName}
+              </p>
+              <p>
+                <strong>Timestamp:</strong> {new Date(stats.timestamp).toLocaleString()}
+              </p>
+            </div>
           </li>
         ))}
       </ul>

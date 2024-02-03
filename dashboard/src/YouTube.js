@@ -56,25 +56,38 @@ const YouTube = () => {
   const handleGetVideoStats = async () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
-
+  
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
       );
-
+  
       const videoData = response.data.items[0];
       const viewsCount = videoData.statistics.viewCount;
       const commentsCount = videoData.statistics.commentCount;
       const likesCount = videoData.statistics.likeCount;
       const name = videoData.snippet.title;
-
+  
       setViewsCount(viewsCount);
       setCommentsCount(commentsCount);
       setLikesCount(likesCount);
       setVideoName(name);
+  
+      dispatch({
+        type: 'ADD_YOUTUBE_STATS_REQUEST',
+        payload: {
+          timestamp: Date.now(),
+          data: {
+            viewsCount,
+            commentsCount,
+            likesCount,
+            videoName: name,
+          },
+        },
+      });
     } catch (error) {
       console.error('Error fetching video information:', error);
     }
-  };
+  };  
 
   const chartData = [
     { name: 'Subscribers', count: subscribersCount },
