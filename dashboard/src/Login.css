@@ -53,10 +53,12 @@ body {
     border: 2px solid #ffa4a4;
   }
   
-  button {
+  .login-button {
     background: #4caf50;
     color: white;
     cursor: pointer;
+    padding: 15px;
+    font-size: 16px
   }
   
   button:disabled {
