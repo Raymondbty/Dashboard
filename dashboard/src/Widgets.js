@@ -45,6 +45,8 @@ const Widgets = () => {
   const { state, dispatch } = useAppContext();
   const [editingIndex, setEditingIndex] = useState(null);
   const [newCity, setNewCity] = useState('');
+  const [editingYouTubeIndex, setEditingYouTubeIndex] = useState(null);
+  const [newChannelName, setNewChannelName] = useState('');
 
   const handleEdit = (index) => {
     setEditingIndex(index);
@@ -72,6 +74,18 @@ const Widgets = () => {
       type: 'DELETE_WEATHER_REQUEST',
       payload: { index },
     });
+  };
+
+  const handleEditYouTube = (index) => {
+    setEditingYouTubeIndex(index);
+    setNewChannelName(state.youtubeRequests[index].data.channelName);
+  };
+
+  const handleUpdateYouTube = (index, channelName) => {
+    // Implémentez la mise à jour de la demande YouTube ici (similaire à handleUpdateWeather)
+    // ...
+
+    setEditingYouTubeIndex(null);
   };
 
   const handleDeleteYouTubeRequest = (index) => {
@@ -124,20 +138,34 @@ const Widgets = () => {
           </li>
         ))}
         {state.youtubeRequests.map((request, index) => (
-          <li key={index} className='youtube-request-container youtube-subscribers-container'>
-            <div>
-              <p>
-                <strong>Channel:</strong> {request.data.channelName} | <strong>Subscribers:</strong> {request.data.subscribersCount}
-              </p>
-              <p>
-                <strong>Timestamp:</strong> {new Date(request.timestamp).toLocaleString()}
-              </p>
-            </div>
-            <div className='edit-buttons'>
-              <button onClick={() => handleDeleteYouTubeRequest(index)}>
-                <img src={crossIcon} alt='Delete' />
-              </button>
-            </div>
+          <li key={index} className={editingYouTubeIndex === index ? 'editing-container' : 'youtube-request-container youtube-subscribers-container'}>
+            {editingYouTubeIndex === index ? (
+              <div>
+                <input type='text' value={newChannelName} onChange={(e) => setNewChannelName(e.target.value)} />
+                <div className='edit-buttons'>
+                  <button onClick={() => handleUpdateYouTube(index, newChannelName)}>
+                    <img src={pencilIcon} alt='Edit' />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <p>
+                  <strong>Channel:</strong> {request.data.channelName} | <strong>Subscribers:</strong> {request.data.subscribersCount}
+                </p>
+                <p>
+                  <strong>Timestamp:</strong> {new Date(request.timestamp).toLocaleString()}
+                </p>
+                <div className='edit-buttons'>
+                  <button onClick={() => handleEditYouTube(index)}>
+                    <img src={pencilIcon} alt='Edit' />
+                  </button>
+                  <button onClick={() => handleDeleteYouTubeRequest(index)}>
+                    <img src={crossIcon} alt='Delete' />
+                  </button>
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
