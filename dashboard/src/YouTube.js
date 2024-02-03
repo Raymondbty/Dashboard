@@ -25,36 +25,38 @@ const YouTube = () => {
   const handleGetChannelSubscribers = async () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
+  
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
       );
-
+  
       const channelData = response.data.items[0];
       const subsCount = channelData.statistics.subscriberCount;
-      const name = channelData.snippet.title;
-
+      const channelName = channelData.snippet.title;
+  
       setSubscribersCount(subsCount);
-      setChannelName(name);
-
+      setChannelName(channelName);
+  
       dispatch({
         type: 'ADD_YOUTUBE_REQUEST',
         payload: {
-            channelId,
-            timestamp: Date.now(),
-            data: {
-                subscribersCount,
-                viewsCount,
-                commentsCount,
-                likesCount,
-                channelName,
-                videoName,
-            },
+          channelId,
+          timestamp: Date.now(),
+          data: {
+            subscribersCount: subsCount,
+            viewsCount,
+            commentsCount,
+            likesCount,
+            channelName,
+            videoName,
+          },
         },
-    });
+      });
     } catch (error) {
       console.error('Error fetching channel information:', error);
     }
   };
+  
 
   const handleGetVideoStats = async () => {
     try {
@@ -102,25 +104,33 @@ const YouTube = () => {
       </div>
 
       {subscribersCount !== null && (
-        <div style={{ marginBottom: '20px' }}>
-          <p>
-            <strong>Subscribers count for {channelName}:</strong> {subscribersCount}
-          </p>
-        </div>
-      )}
-
       <div style={{ marginBottom: '20px' }}>
-        <label htmlFor="videoInput">Enter video ID:</label>
-        <input
-          type="text"
-          id="videoInput"
-          value={videoId}
-          onChange={handleVideoChange}
-          placeholder="Enter video ID"
-          style={{ marginRight: '10px' }}
-        />
-        <button onClick={handleGetVideoStats}>Get Video Stats</button>
+        <p>
+          <strong>Subscribers count for {channelName}:</strong> {subscribersCount}
+        </p>
       </div>
+    )}
+
+    {channelName !== '' && (
+          <div style={{ marginBottom: '20px' }}>
+            <p>
+              <strong>Channel name:</strong> {channelName}
+            </p>
+          </div>
+        )}
+
+<div style={{ marginBottom: '20px' }}>
+      <label htmlFor="videoInput">Enter video ID:</label>
+      <input
+        type="text"
+        id="videoInput"
+        value={videoId}
+        onChange={handleVideoChange}
+        placeholder="Enter video ID"
+        style={{ marginRight: '10px' }}
+      />
+      <button onClick={handleGetVideoStats}>Get Video Stats</button>
+    </div>
 
       {viewsCount !== null && (
         <div style={{ marginBottom: '20px' }}>
