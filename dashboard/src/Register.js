@@ -24,10 +24,11 @@ const Register = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
+  const [redirected, setRedirected] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch("http://localhost:3001/register", {
         method: "POST",
@@ -36,22 +37,26 @@ const Register = () => {
         },
         body: JSON.stringify(values),
       });
-
+  
       if (response.ok) {
         setValid(true);
         setSubmitted(true);
-        navigate("/login");
-        } else {
-        console.error("Registration failed");
+        setRedirected(true);
+  //      navigate("/login");
+      } else {
+        const data = await response.json();
+        console.error("Registration failed:", data.message);
       }
     } catch (error) {
       console.error("Error during registration:", error);
     }
   };
+  
+
   return (
     <div className="form-container">
       <form className="register-form" onSubmit={handleSubmit}>
-        {submitted && valid && (
+      {submitted && valid && !redirected && (
           <div className="success-message">
             <h3>
               Welcome {values.firstName} {values.lastName}
@@ -59,7 +64,6 @@ const Register = () => {
             <div>Your registration was successful!</div>
           </div>
         )}
-
         {!valid && (
           <input
             className="form-field"
