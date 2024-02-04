@@ -21,7 +21,7 @@ ul {
   margin: auto;
   text-align: center;
   box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,7 +136,7 @@ ul {
   margin: auto;
   text-align: center;
   box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -155,7 +155,7 @@ ul {
   margin: auto;
   text-align: center;
   box-shadow: 100px 100px 100px rgba(0, 0, 0, 0.1);
-  height: 300px; /* Ajustez la hauteur en fonction de vos besoins */
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
