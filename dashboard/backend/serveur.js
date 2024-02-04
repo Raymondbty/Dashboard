@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const port = 3001;
+const axios = require('axios');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -29,6 +30,32 @@ app.post('/login', (req, res) => {
   } else {
     res.status(401).json({ success: false, message: 'Login failed' });
   }
+});
+
+const CLIENT_ID = '870640262687-vk8bviuch1pb3i0nch17q2gc46kuek9l.apps.googleusercontent.com';
+const CLIENT_SECRET = ' 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';
+const REDIRECT_URI = 'http://localhost:3001/auth/youtube/callback'
+
+app.get('/auth/youtube', (req, res) => {
+  const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=https://www.googleapis.com/auth/youtube.readonly&response_type=code`;
+  res.redirect(authUrl);
+});
+
+app.get('/auth/youtube/callback', async (req, res) => {
+  const { code } = req.query;
+
+  const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', null, {
+    params: {
+      code,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: REDIRECT_URI,
+      grant_type: 'authorization_code',
+    },
+  });
+
+  const accessToken = tokenResponse.data.access_token;
+  res.send('success');
 });
 
 app.listen(port, () => {
