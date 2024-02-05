@@ -11,14 +11,18 @@ app.use(cors());
 const users = [];
 
 app.post('/register', (req, res) => {
+  console.log('Received registration request:', req.body);
+
   const { firstName, lastName, email, password } = req.body;
 
   if (users.find(user => user.email === email)) {
+    console.log('User already exists.');
     return res.status(400).json({ success: false, message: 'User already exists' });
   }
 
   users.push({ firstName, lastName, email, password });
 
+  console.log('Registration successful.');
   res.status(200).json({ success: true, message: 'Registration successful' });
 });
 
