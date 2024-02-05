@@ -13,11 +13,9 @@ const Register = () => {
   });
 
   const handleInputChange = (event) => {
-    event.preventDefault();
-
     const { name, value } = event.target;
-    setValues((values) => ({
-      ...values,
+    setValues((prevValues) => ({
+      ...prevValues,
       [name]: value
     }));
   };
@@ -28,9 +26,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await fetch("http://localhost:3001/register", {
+      const response = await fetch("http://localhost:3001/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,15 +40,17 @@ const Register = () => {
         setValid(true);
         setSubmitted(true);
         setRedirected(true);
+        const data = await response.json();
+        console.log("Registration successful:", data)
   //      navigate("/login");
       } else {
         const data = await response.json();
         console.error("Registration failed:", data.message);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+    console.error("Error during registration:", error);
     }
-  };
+};
   
 
   return (

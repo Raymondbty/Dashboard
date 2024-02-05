@@ -4,11 +4,24 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 const axios = require('axios');
+const { Pool } = require('pg');
+require('dotenv').config();
+const userRoutes = require('./routes/user');
 
 app.use(bodyParser.json());
 app.use(cors());
 
+const pool = new Pool({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
+});
+
 const users = [];
+
+app.use('/user', userRoutes);
 
 app.post('/register', (req, res) => {
   console.log('Received registration request:', req.body);
