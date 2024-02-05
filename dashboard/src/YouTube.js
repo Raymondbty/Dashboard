@@ -25,8 +25,7 @@ const YouTube = () => {
 
   const handleGetChannelSubscribers = async () => {
     try {
-      const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
-  
+      const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;  
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
       );
@@ -56,7 +55,7 @@ const YouTube = () => {
 
   const handleGetVideoStats = async () => {
     try {
-      const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
+      const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
   
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
