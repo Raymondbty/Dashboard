@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useAppContext } from './AppContext';
+import returnImage from './return.png';
 
 const YouTube = () => {
   const { dispatch } = useAppContext();  
@@ -96,6 +97,17 @@ const YouTube = () => {
     { name: 'Likes', count: likesCount },
   ];
 
+  const returnButton = (
+    <button
+      onClick={() => {
+        window.location.href = 'http://localhost:3000/Dashboard#/dashboard';
+      }}
+    >
+      <img src={returnImage} alt="Return" style={{ width: '20px', height: '20px', marginRight: '5px' }} />
+      Go to Dashboard
+    </button>
+  );
+
   return (
     <div style={{ padding: '20px', background: '#f0f0f0', borderRadius: '10px', maxWidth: '600px', margin: 'auto' }}>
       <div style={{ marginBottom: '20px' }}>
@@ -110,7 +122,7 @@ const YouTube = () => {
         />
         <button onClick={handleGetChannelSubscribers}>Get Subscribers</button>
       </div>
-
+      <div style={{ marginBottom: '20px' }}>{returnButton}</div>
       {subscribersCount !== null && (
         <div style={{ marginBottom: '20px' }}>
           <p>
