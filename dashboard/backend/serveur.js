@@ -44,18 +44,26 @@ app.get('/auth/youtube', (req, res) => {
 app.get('/auth/youtube/callback', async (req, res) => {
   const { code } = req.query;
 
-  const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', null, {
-    params: {
-      code,
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      redirect_uri: REDIRECT_URI,
-      grant_type: 'authorization_code',
-    },
-  });
+  try {
+    const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', null, {
+      params: {
+        code,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        redirect_uri: REDIRECT_URI,
+        grant_type: 'authorization_code',
+      },
+    });
 
-  const accessToken = tokenResponse.data.access_token;
-  res.send('success');
+    const accessToken = tokenResponse.data.access_token;
+
+    youtubeAuthSuccess = true;
+
+    res.redirect('http://localhost:3000/Dashboard#/youtube?authSuccess=true');
+  } catch (error) {
+    console.error('Erreur lors de l\'authentification :', error);
+    res.redirect('http://localhost:3000/Dashboard#/youtube?authSuccess=false');
+  }
 });
 
 app.listen(port, () => {

@@ -7,7 +7,7 @@ export default function Login() {
     firstName: "",
     lastName: "",
     email: "",
-    password: "", // Ajout de la clé password
+    password: "",
   });
 
   const handleInputChange = (event) => {
