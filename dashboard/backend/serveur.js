@@ -33,7 +33,7 @@ app.post('/login', (req, res) => {
 });
 
 const CLIENT_ID = '870640262687-vk8bviuch1pb3i0nch17q2gc46kuek9l.apps.googleusercontent.com';
-const CLIENT_SECRET = ' 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';
+const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'http://localhost:3001/auth/youtube/callback'
 
 app.get('/auth/youtube', (req, res) => {
