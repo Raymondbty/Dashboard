@@ -58,6 +58,7 @@ const Widgets = () => {
   const handleUpdateWeather = async (index, city) => {
     try {
       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ad6e12e12b001e5b3e58fc461af326d9`);
+      console.log(`API Response for city ${city}:`, response.data);
       dispatch({
         type: 'UPDATE_WEATHER_REQUEST',
         payload: { index, newCity: city, newData: response.data },
@@ -84,6 +85,7 @@ const Widgets = () => {
     try {
       const apiKey = 'AIzaSyAv7htuGSYb3GgKvuW2ud-zbbG-tIzyUNg';
       const response = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`);
+      console.log(`API Response for YouTube Channel ${channelId}:`, response.data);
       const channelData = response.data.items[0];
       const subsCount = channelData.statistics.subscriberCount;
       const channelName = channelData.snippet.title;
@@ -125,7 +127,7 @@ const Widgets = () => {
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apiKey}`
       );
-  
+      console.log(`API Response for YouTube Video ${videoId}:`, response.data);
       if (response.data && response.data.items && response.data.items.length > 0) {
         const videoData = response.data.items[0];
         const viewsCount = videoData.statistics && videoData.statistics.viewCount;
@@ -160,6 +162,7 @@ const Widgets = () => {
       console.error('Error fetching video information:', error);
     }
   };
+
   const handleDeleteYouTubeStatsRequest = (index) => {
     dispatch({
       type: 'DELETE_YOUTUBE_STATS_REQUEST',
