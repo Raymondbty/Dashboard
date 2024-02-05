@@ -49,9 +49,9 @@ app.post('/login', (req, res) => {
   }
 });
 
-const CLIENT_ID = '870640262687-vk8bviuch1pb3i0nch17q2gc46kuek9l.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'http://localhost:3001/auth/youtube/callback'
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 app.get('/auth/youtube', (req, res) => {
   const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=https://www.googleapis.com/auth/youtube.readonly&response_type=code`;
