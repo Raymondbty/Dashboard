@@ -22,7 +22,7 @@ const Dashboard = () => {
   };
 
   const redirectToYouTube = () => {
-    navigate('/youtube');
+    window.location.href = 'http://localhost:3001/auth/youtube';
   };
 
   return (
